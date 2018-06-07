@@ -1,0 +1,19 @@
+.navbar {
+  color: #fff;
+  font-size: 18px;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+  background-color: lightblue;
+  height: 100px;
+  line-height: 20px;
+}
+
+.row {
+  width: 100%;
+}
+
+a {
+  color: white;
+  font-size: 32px;
+}
