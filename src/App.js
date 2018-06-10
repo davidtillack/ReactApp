@@ -10,7 +10,7 @@ import "./App.css";
 // Set changing variables
 let score = 0;
 let topScore = 0;
-let message = "Click an image to begin!";
+let message = "Click a card to begin!";
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
@@ -41,9 +41,9 @@ class App extends Component {
     if (friendCards[0].clicked) {
       // Change message to if card already clicked matches with card clicked and
       // alert user they lose and refresh the page to start new game for them
-      let message = "You already clicked that player!";
+      let message = "You already clicked that card!";
       this.setState({ message });
-      alert("Oh no, you lose!");
+      alert("Oh no - you lose!");
       window.location.reload();
       let score = 0;
 
@@ -58,15 +58,15 @@ class App extends Component {
       // Increment score counter
       score++;
       console.log(score);
-      message = "Good Job! Keep on clicking new players!";
+      message = "Good Job! Keep on clicking new cards!";
 
       // Randomly sort the cards
       friends.sort(function() {
         return Math.random();
       });
 
-      // Have score match Topscore for topscore monitoring... logic needs work
-      // to keep top score versus score matching topscore
+      // Have score match topScore for topscore monitoring... logic needs work
+      // to keep top score versus score matching topScore
       if (score > topScore) {
         topScore = score;
         this.setState({ topScore });
@@ -91,7 +91,7 @@ class App extends Component {
         <NavBar>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-m-4 col-lg-4 col-xl-4">
-              <a href=".">Clicky Game</a>
+              <a href=".">Clicky Memory Game</a>
             </div>
             <div class="col-xs-12 col-sm-12 col-m-4 col-lg-4 col-xl-4">
               {this.state.message}
