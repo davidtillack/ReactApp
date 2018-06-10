@@ -21,16 +21,67 @@ class App extends Component {
     message
   };
 
-  removeFriend = id => {
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    this.setState({ friends });
-  };
+  // removeFriend = id => {
+  //   // Filter this.state.friends for friends with an id not equal to the id being removed
+  //   const friends = this.state.friends.filter(friend => friend.id !== id);
+  //   // Set this.state.friends equal to the new friends array
+  //   this.setState({ friends });
+  // };
 
-  handleIncrement = () => {
-    // We always use the setState method to update a component's state
-    this.setState({ score: this.state.score + 1 });
+  // handleIncrement = () => {
+  //   // We always use the setState method to update a component's state
+  //   this.setState({ score: this.state.score + 1 });
+  // };
+
+  cardClicked = id => {
+    const friends = this.state.friends;
+    const friendCards = friends.filter(friend => friend.id === id);
+
+    // If card clicked statement
+    if (friendCards[0].clicked) {
+      // Change message to if card already clicked matches with card clicked and
+      // alert user they lose and refresh the page to start new game for them
+      let message = "You already clicked that player!";
+      this.setState({ message });
+      alert("Oh no, you lose!");
+      window.location.reload();
+      let score = 0;
+
+      console.log(score);
+      console.log(topScore);
+      // Game logic for below the top score of getting all cards
+    } else if (score < 12) {
+      for (let i = 0; i < friends.length; i++) {
+        // Alignment of cards to be assigned value
+        friendCards[0].clicked = i;
+      }
+      // Increment score counter
+      score++;
+      console.log(score);
+      message = "Good Job! Keep on clicking new players!";
+
+      // Randomly sort the cards
+      friends.sort(function() {
+        return Math.random();
+      });
+
+      // Have score match Topscore for topscore monitoring... logic needs work
+      // to keep top score versus score matching topscore
+      if (score > topScore) {
+        topScore = score;
+        this.setState({ topScore });
+      } else {
+        topScore = 0;
+        console.log(topScore);
+      }
+      this.setState({ friends });
+      this.setState({ score });
+      this.setState({ message });
+    } else {
+      // alert user that they won and refresh game
+      alert("Great job, you won!");
+      window.location.reload();
+    }
   };
 
   // Map over this.state.friends and render a FriendCard component for each friend object
@@ -55,6 +106,7 @@ class App extends Component {
         {this.state.friends.map(friend => (
           <FriendCard
             removeFriend={this.removeFriend}
+            cardClicked={this.cardClicked}
             id={friend.id}
             key={friend.id}
             name={friend.name}

@@ -2,7 +2,12 @@ import React from "react";
 import "./FriendCard.css";
 
 const FriendCard = props => (
-  <div className="card btn btn-primary" onClick={props.handleIncrement}>
+  <div
+    onClick={() => {
+      props.cardClicked(props.id);
+    }}
+    className="card btn btn-primary"
+  >
     <div className="img-container">
       <img alt={props.name} src={props.image} />
     </div>
